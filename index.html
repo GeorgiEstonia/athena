@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+
+
+
+</head>
+<html>
+<body>
+    <script>
+        function submit_form() {
+            console.log("input")
+
+            let input = document.getElementById("subject").value;
+            let langs_one = document.getElementsByName('lang_one');
+            let langs_two = document.getElementsByName('lang_two');
+            
+            for (let i = 0, length = langs_one.length; i < length; i++) {
+            if (langs_one[i].checked) {
+                var lang_one = langs_one[i].value;
+                break;
+            }
+            }
+
+            for (let i = 0, length = langs_two.length; i < length; i++) {
+            if (langs_two[i].checked) {
+                var lang_two = langs_two[i].value;
+                console.log(lang_two)
+                break;
+            }
+            }
+            console.log(input)  
+            cardNum = Math.floor(Math.random() * 5);
+            // var cardwindow = window.open("card"+cardNum+".html?subject="+input);
+            var cardwindow = window.open("card.html?subject="+input+"&lang_one="+lang_one+"&lang_two="+lang_two);
+
+}
+    </script>
+    <div id="main_block">
+        <h1>🎉Welcome to the game!🎉</h1>
+        <h2>¡Bienvenidos al juego!</h2>
+        <form onsubmit="submit_form()" id="subject_form">
+            <div class="float_radio">
+                <div class="radio_column">
+                    <p>Language one</p>
+                    <input type="radio" class="en" name="lang_one" value="en" required>
+                    <label for="en">🇺🇸</label><br>
+                    <input type="radio" class="es" name="lang_one" value="es">
+                    <label for="es">🇪🇸</label><br>
+                </div>
+                <div class="radio_column">
+                    <p>Language two</p>
+                    <input type="radio" class="en" name="lang_two" value="en" required>
+                    <label for="en">🇺🇸</label><br>
+                    <input type="radio" class="es" name="lang_two" value="es">
+                    <label for="es">🇪🇸</label><br>
+                </div>
+            </div>
+            <label for="subject">Subject:</label><br>
+            <input type="text" id="subject" name="subject"><br><br>
+            <input type="submit" value="Start" class="control_button">
+          </form>
+    </div>
+</body>
+</html>
