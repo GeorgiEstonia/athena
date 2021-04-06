@@ -1,50 +1,52 @@
 var Timer = require("./node_modules/easytimer.js").Timer;
 var timerInstance = new Timer();
+window.showAnswer = function(lang, answer) {
+  console.log("TRIGGERED");
+  if (lang === 1) {
+    window.document.getElementById("lang_one_action").innerHTML = "";
+    window.document.getElementById("lang_one_paragraph").innerHTML = answer;
+    window.document.getElementById("lang_one_answ_btn").innerHTML = "";
+  } else {
+    window.document.getElementById("lang_two_action").innerHTML = "";
+    window.document.getElementById("lang_two_paragraph").innerHTML = answer;
+    window.document.getElementById("lang_two_answ_btn").innerHTML = "";
+  }
+}
 window.createCard =function() {
 
 
-  // JQUERRY create tags from nicknames
-  $(function(){ // DOM ready
 
-    // ::: TAGS BOX
-  
-    $("#tags textarea").on({
-      focusout : function() {
-        var txt = this.value.replace(/[^a-z0-9\+\-\.\#]/ig,''); // allowed characters
-        if(txt) $("<span/>", {text:txt, insertBefore:this}); // adds span elements
-        this.value = "";
-      },
-      keyup : function(ev) {
-        // if: comma|enter (delimit more keyCodes with | pipe)
-        if(/(188|13|32)/.test(ev.which)) $(this).focusout(); 
-      }
-    });
-    $('#tags').on('click', 'span', function() {
-      if(confirm("Remove "+ $(this).text() +"?")) $(this).remove();  // alert to confirm removal
-    });
-  
-  });
 
 
   //Timer
   timerFunction();
-  // Google sheets stuff
+
+  //params from url
   const queryString = window.location.search;
   console.log(queryString);
   const urlParams = new URLSearchParams(queryString);
   const subject = urlParams.get('subject')
   const lang_one = urlParams.get('lang_one')
-  const lang_two = urlParams.get('lang_two')  
-  console.log(subject);
+  const lang_two = urlParams.get('lang_two')
+  const deck = urlParams.get('deck')
+  const team_string = urlParams.get('team')  
+  const nicknames = team_string.split("_")
+  show_roles(nicknames)
+  console.log(deck)
 
+
+  // Google sheets stuff
   var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRXAUqgnOmVy8s5EL6SrLs9Q0olse49ZkGOSsygoEjvGtR_v7g6iFsAA__cZINiUQOC7DSoQ6IG9StY/pub?gid=0&single=true&output=csv';
 
   const reader = require("./node_modules/g-sheets-api");
   const readerOptions = {
     sheetId: "1O2RAmqAw38ALQfCkuBAvbCgKE8bah6Nvt_q-PLtra6w",
-    returnAllResults: true
+    returnAllResults: false,
+    filter: {
+      "subject": deck
+    }
   };
-  
+
   reader(readerOptions, (results) => {
       console.log("results " + results)
       cardNum = Math.floor(Math.random() * (results.length));
@@ -54,6 +56,7 @@ window.createCard =function() {
         window.document.getElementById("lang_one_title").innerHTML = results[cardNum][lang_one+"_title"].replace("$blahblahblah$", subject);
         window.document.getElementById("lang_one_action").innerHTML = results[cardNum][lang_one+"_action"].replace("$blahblahblah$", subject);
         window.document.getElementById("lang_one_paragraph").innerHTML = results[cardNum][lang_one+"_paragraph"].replace("$blahblahblah$", subject);
+        
         console.log(results[cardNum]["image_link"])
         window.document.getElementsByClassName("illustration")[0].src = results[cardNum]["image_link"];
         window.document.getElementsByClassName("illustration")[1].src = results[cardNum]["image_link"];
@@ -63,9 +66,32 @@ window.createCard =function() {
         window.document.getElementById("lang_two_title").innerHTML = results[cardNum][lang_two+"_title"].replace("$blahblahblah$", subject);
         window.document.getElementById("lang_two_action").innerHTML = results[cardNum][lang_two+"_action"].replace("$blahblahblah$", subject);
         window.document.getElementById("lang_two_paragraph").innerHTML = results[cardNum][lang_two+"_paragraph"].replace("$blahblahblah$", subject);
+
+
+        //window.document.getElementById("lang_two_answ_btn").innerHTML = "<button class='control_button'>Reveal answer</button>"
+
+
+
       } catch (err) {
         console.log("ERROR " + err)
       }
+        // Answers
+        window.document.getElementById("lang_one_answ_btn").innerHTML = "<button class='control_button'>Reveal answer</button>"
+
+        langOneAnsw = results[cardNum][lang_one+"_solutions"];
+        langTwoAnsw = results[cardNum][lang_two+"_solutions"];
+        console.log("ANSW " + langOneAnsw + langTwoAnsw)
+        if (langOneAnsw !== undefined) {
+          window.document.getElementById("lang_one_answ_btn").innerHTML = "<button class='control_button' onclick='showAnswer(1,\""+String(langOneAnsw)+"\")'>Reveal answer</button>"
+        } else {
+          window.document.getElementById("lang_one_answ_btn").innerHTML = "";
+        }
+        if (langTwoAnsw !== undefined) {
+          window.document.getElementById("lang_two_answ_btn").innerHTML = "<button class='control_button' onclick='showAnswer(2,\""+String(langTwoAnsw)+"\")'>Reveal answer</button>"
+        } else {
+          window.document.getElementById("lang_two_answ_btn").innerHTML = "";
+        }
+
     /* Do something amazing with the results */
   });
 
@@ -122,26 +148,29 @@ window.fireworks = function() {
   });
 }
 
-window.show_roles = function() {
-  let input_children = document.getElementById("tags").querySelectorAll("span"); // get all spans
-  var nicknames = [];
-  for(var value of input_children) { // loop thru each span and get its value
-    console.log(value);
-    console.log(typeof(value));
-    nicknames.push(value.textContent);
-  }
+window.show_roles = function(nicknames) {
+
   console.log(nicknames)
-  localStorage.setItem('nicknames', nicknames); // store nicnames locally
   nicknames = shuffle(nicknames); // shuffle
 
-  let roles = document.getElementsByClassName("roles")[0];
-  roles.innerHTML = "";
-  let role_descriptions = ["take notes on how your game goes and who wins each round","keep track of whoever needs to respond, make sure everyone is participating","reads the cards out loud", "pushes to get the group to do 1-2 minutes/card", "reports insights to larger groups + number of cards covered"]
-
-  for (var i = 0; i < Math.min(nicknames.length, role_descriptions.length); i++) {
-    roles.innerHTML += "<h4>"+nicknames[i]+"</h4> <p>"+role_descriptions[i]+"</p><br>";
+  let roles = document.getElementsByClassName("roles_card")[0];
+  roles.innerHTML = "<h4>Play according to these roles:</h4><br>";
+  let role_descriptions = [
+      "Speaker🎙: reads the cards to the group",
+      "Solver💡: performs the task unless it's a group exercise",
+      "Note-taker📝: writes down the takeaways of each round ",
+      "Facilitator🤝: tracks turn order and encourages team cooperation",
+      "Time-keeper⏱: limits the turns to 2 minutes",
+    ]
+  if (nicknames.length>1) {
+    for (var i = 0; i < Math.min(nicknames.length, role_descriptions.length); i++) {
+      roles.innerHTML += "<h4>"+nicknames[i]+"</h4> <p>"+role_descriptions[i]+"</p><br>";
+    }
+  } else {
+    for (var i = 0; i < role_descriptions.length; i++) {
+      roles.innerHTML += "<br>"+"<p>"+role_descriptions[i]+"</p><br>";
+    }
   }
-
 }
 
 // shuffling alg

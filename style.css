@@ -9,16 +9,98 @@
   --theme-four:#2f405a;
 }
 
+
+
+.container {
+  width: 100%;
+  margin: 0 auto 0;
+  -webkit-perspective: 1000;
+  -webkit-backface-visibility: hidden;
+}
+
+.pulse-button {
+  margin: auto;
+  position: relative;
+  display: block;
+  width: 80%;
+  height: 100px;
+  font-size: 1.3em;
+  font-weight: light;
+  font-family: 'Trebuchet MS', sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 100px;
+  letter-spacing: -1px;
+  color: white;
+  border: none;
+  border-radius: 2em;
+  background: var(--theme-three);
+  cursor: pointer;
+  box-shadow: 0 0 0 0 rgba(#f94260, .5);
+  animation: pulse 1.5s infinite;
+}
+.pulse-button:hover {
+  background: var(--theme-one);
+  
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(249, 66, 96, 0.7);
+	}
+
+	70% {
+		transform: scale(1);
+		box-shadow: 0 0 0 10px rgba(249, 66, 96, 0);
+	}
+
+	100% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(249, 66, 96, 0);
+	}
+}
+.left_al {
+  text-align: left;
+  margin: 4em;
+}
+
 html, body {
     height: 100%;
     background-color: var(--theme-two);
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Proxima Nova';
+}
+#langs_form {
+  margin: auto;
+}
+#langs_form input {
+  float: left;
+}
+#langs_form span {
+  float: left;
 }
 
-#main_block {
+.i_wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+}
+.main_block iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.main_block {
+  margin: auto;
+  margin-top: 1%;
     padding: 3ex;
     width: 50%;
-    height: 90%;
     background-color: white;
     border-radius: 2em;
     text-align: center;
@@ -27,6 +109,9 @@ html, body {
     -moz-box-shadow: 0 10px 6px -6px #696969;
          box-shadow: 0 10px 6px -6px #696969;
 
+}
+.vid {
+  margin-top: 2em;
 }
 
 #timer {
@@ -63,10 +148,28 @@ html, body {
   margin-top: 1ex;
 
 }
+.roles_card {
+    padding: 3ex;
+    width: 100%;
+    border-radius: 2em;
+    text-align: left;
+    color: white;
+    background-color:var(--theme-four);
 
+    -webkit-box-shadow: 0 10px 6px -6px #696969;
+    -moz-box-shadow: 0 10px 6px -6px #696969;
+         box-shadow: 0 10px 6px -6px #696969;
+}
+.roles_card h4 {
+  color: var(--theme-two);
+}
 .roles {
-    flex: 4;
-    padding: 5ex;
+  margin: auto;
+  margin-top: 1%;
+    padding: 3ex;
+    width: 50%;
+    border-radius: 2em;
+    position:relative;
     background-color:var(--theme-four);
     border-radius: 2em;
     text-align: left;

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+
+
+
+</head>
+<html>
+<body>
+    <script>
+        function openWindow(deck, card) {
+            window.open(card+".html?deck="+deck, "_self");
+        }
+    </script>
+    <div class="main_block">
+        <h3>We have a couple of decks prepared for you 😊</h3>
+        <br>
+        <h1>Would you like to play biology or a custome deck?</h1>
+        <div class="buttons">
+            <button class="control_button" onclick="openWindow('cells_and_organisms','languages')">🦠BIOLOGY</button>
+            <button class="control_button" onclick="openWindow('general','custom_deck')">CUSTOM DECK</button>
+        </div>
+    </div>
+</body>
+</html>

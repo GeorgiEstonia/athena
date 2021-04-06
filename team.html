@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+                  // JQUERRY create tags from nicknames
+         $(function(){ // DOM ready
+            // ::: TAGS BOX
+            $("#tags textarea").on({
+            focusout : function() {
+                var txt = this.value.replace(/[^a-z0-9\+\-\.\#]/ig,''); // allowed characters
+                if(txt) $("<span/>", {text:txt, insertBefore:this}); // adds span elements
+                this.value = "";
+            },
+            keyup : function(ev) {
+                // if: comma|enter (delimit more keyCodes with | pipe)
+                if(/(188|13|32)/.test(ev.which)) $(this).focusout(); 
+            }
+            });
+            $('#tags').on('click', 'span', function() {
+                if(confirm("Remove "+ $(this).text() +"?")) $(this).remove();  // alert to confirm removal
+            });
+
+        });
+    </script>
+
+
+</head>
+<html>
+<body>
+    <script>
+        function startGame() {
+            let input_children = document.getElementById("tags").querySelectorAll("span"); // get all spans
+            var nicknames = "";
+            for(var value of input_children) { // loop thru each span and get its value
+                nicknames+=value.textContent+"_";
+                
+            }
+            const nicknamesMod = nicknames.slice(0, -1) 
+            const queryString = window.location.search;
+            console.log(queryString);
+            const urlParams = new URLSearchParams(queryString);
+            const deck = urlParams.get('deck')
+            const subject = urlParams.get('subject')
+            const lang_one = urlParams.get('lang_one')
+            const lang_two = urlParams.get('lang_two')
+            window.open("card.html?deck="+deck+"&subject="+ subject+"&lang_one="+lang_one+"&lang_two="+lang_two+"&team="+nicknamesMod, "_self");
+        }
+    </script>
+    <div class="roles">
+        <h3>Almost there! 🎉</h3>
+        <h5>This game is best played in groups of 5</h5>
+        <h1>Please enter the nicknames of your teammates or just skip to the game!</h1>
+        <form id="nicknames_form">
+            <div id="tags">
+                <textarea placeholder="Nicknames" id="nicknames" name="nicknames" rows="1"></textarea><br><br>
+            </div>
+        </form>
+        <button class="control_button" onclick="startGame()">START 🎉</button>
+    </div>   
+</body>
+</html>

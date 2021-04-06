@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+
+
+
+</head>
+<html>
+<body>
+    <script>
+        function submit_form() {
+            const queryString = window.location.search;
+            console.log(queryString);
+            const urlParams = new URLSearchParams(queryString);
+            const deck = urlParams.get('deck')
+            let subject = document.getElementById("subject").value;
+            if (subject) {
+                window.open("languages.html?deck="+deck+"&subject="+ subject, "_self");
+            } else {
+                alert("Please enter a subject!")
+            }
+        }
+    </script>
+    <div class="main_block">
+        <h1>Please enter any topic you wish!</h1>
+        <label for="subject">Topic:</label><br>
+        <input type="text" id="subject" name="subject" required><br><br>
+        <button class="control_button" onclick="submit_form()">YAAAAY</button>
+    </div>
+</body>
+</html>

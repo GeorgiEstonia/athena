@@ -9,7 +9,8 @@
     "easytimer": "^1.1.1",
     "easytimer.js": "^4.3.4",
     "g-sheets-api": "^1.4.1",
-    "jquerry": "0.0.1-security"
+    "jquerry": "0.0.1-security",
+    "react": "^17.0.2"
   },
   "devDependencies": {},
   "scripts": {
