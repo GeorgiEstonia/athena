@@ -14,8 +14,8 @@
 .container {
   width: 100%;
   margin: 0 auto 0;
-  -webkit-perspective: 1000;
-  -webkit-backface-visibility: hidden;
+  perspective: 1000;
+  backface-visibility: hidden;
 }
 
 .pulse-button {
