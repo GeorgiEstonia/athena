@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css?v=1.2">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Athena</title>
+    <link rel = "icon" href = "lambda.png" type = "image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+                  // JQUERRY create tags from nicknames
+         $(function(){ // DOM ready
+            // ::: TAGS BOX
+            $("#tags textarea").on({
+            focusout : function() {
+                var txt = this.value.replace(/[^a-z0-9\+\-\.\#]/ig,''); // allowed characters
+                if(txt) $("<span/>", {text:txt, insertBefore:this}); // adds span elements
+                this.value = "";
+            },
+            keyup : function(ev) {
+                // if: comma|enter (delimit more keyCodes with | pipe)
+                if(/(188|13|32)/.test(ev.which)) $(this).focusout(); 
+            }
+            });
+            $('#tags').on('click', 'span', function() {
+                if(confirm("Remove "+ $(this).text() +"?")) $(this).remove();  // alert to confirm removal
+            });
+
+        });
+        window.shuffle = function (a) {
+            var j, x, i;
+            for (i = a.length - 1; i > 0; i--) {
+                j = Math.floor(Math.random() * (i + 1));
+                x = a[i];
+                a[i] = a[j];
+                a[j] = x;
+            }
+            return a;
+            }
+        function showRoles () {
+            countDown()
+            const queryString = window.location.search;
+            console.log(queryString);
+            const urlParams = new URLSearchParams(queryString);
+            const team_string = urlParams.get('team')  
+            let nicknames = team_string.split("_")
+            console.log(nicknames)
+            // nicknames = shuffle(nicknames); // shuffle
+
+            let roles = document.getElementsByClassName("role_descriptions")[0];
+            let role_descriptions = [
+                "Speaker🎙: reads the cards to the group",
+                "Solver💡: performs the task unless it's a group exercise",
+                "Note-taker📝: writes down the takeaways of each round ",
+                "Facilitator🤝: tracks turn order and encourages team cooperation",
+                "Time-keeper⏱: limits the turns to 2 minutes",
+            ]
+            if (nicknames.length>1) {
+            for (var i = 0; i < Math.min(nicknames.length, role_descriptions.length); i++) {
+                roles.innerHTML += "<h4>"+nicknames[i]+"</h4> <p>"+role_descriptions[i]+"</p><br>";
+            }
+            } else {
+            for (var i = 0; i < role_descriptions.length; i++) {
+                roles.innerHTML += "<br>"+"<p>"+role_descriptions[i]+"</p><br>";
+            }
+            }
+        }
+        function countDown() {
+            var seconds = 30;
+            const countDownTimer = window.document.getElementById("countDown");
+            setInterval(function() {
+                seconds--;
+                console.log(seconds)
+
+                if (seconds >= 0 && seconds < 10) {
+                    countDownTimer.innerHTML = "🕒 00:0"+seconds
+                } else if (seconds >= 0 && seconds >= 10) {
+                    countDownTimer.innerHTML = "🕒 00:"+seconds
+                } else {
+                    document.getElementById("pulsing_btn").classList.add("pulse_anim");
+                    document.getElementById("countDown").classList.add("pulse_anim");
+                }
+            }, 1000);
+        }
+    </script>
+
+
+</head>
+<html>
+<body onload="showRoles()">
+    <script>
+        function startGame() {
+
+            const queryString = window.location.search;
+            console.log(queryString);
+            const urlParams = new URLSearchParams(queryString);
+            const deck = urlParams.get('deck')
+            const subject = urlParams.get('subject')
+            const lang_one = urlParams.get('lang_one')
+            const lang_two = urlParams.get('lang_two')
+            const nicknamesMod = urlParams.get('team')
+            window.open("card.html?deck="+deck+"&subject="+ subject+"&lang_one="+lang_one+"&lang_two="+lang_two+"&team="+nicknamesMod, "_self");
+        }
+    </script>
+        <div class="top">
+            <div class="card_logo">
+                <a href="index.html"><img src="athena.png"></a>
+            </div>
+            <div class="controls">
+                <div id="countDown" class="bubble">🕒 00:30</div>
+            </div>
+        </div>
+    <div class="col-md-6 mx-auto">
+        <div class="roles_card" >
+            <h3>Explore your roles! 🧐</h3>
+            <br>
+            <h1>Take 30 seconds to carefully read your role!</h1>
+            <br>
+            <div class="role_descriptions"></div>
+            <div class="roles_btn">
+                <button class="control_button" onclick="startGame()" id="pulsing_btn">START 🎉</button>
+            </div>
+        </div>   
+    </div>
+</body>
+</html>

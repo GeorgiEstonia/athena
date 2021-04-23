@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css?v=1.1">
+    <link rel="stylesheet" href="style.css?v=1.2">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
+    <title>Athena</title>
+    <link rel = "icon" href = "lambda.png" type = "image/x-icon">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
                   // JQUERRY create tags from nicknames
@@ -48,19 +50,26 @@
             const subject = urlParams.get('subject')
             const lang_one = urlParams.get('lang_one')
             const lang_two = urlParams.get('lang_two')
-            window.open("card.html?deck="+deck+"&subject="+ subject+"&lang_one="+lang_one+"&lang_two="+lang_two+"&team="+nicknamesMod, "_self");
+            window.open("roles.html?deck="+deck+"&subject="+ subject+"&lang_one="+lang_one+"&lang_two="+lang_two+"&team="+nicknamesMod, "_self");
         }
     </script>
-    <div class="roles">
-        <h3>Almost there! 🎉</h3>
-        <h5>This game is best played in groups of 5</h5>
-        <h1>Please enter the nicknames of your teammates or just skip to the game!</h1>
-        <form id="nicknames_form">
-            <div id="tags">
-                <textarea placeholder="Nicknames" id="nicknames" name="nicknames" rows="1"></textarea><br><br>
+        <div class="logo">
+            <a href="index.html"><img src="athena.png"></a>
+        </div>
+    <div class="col-md-6 mx-auto">
+        <div class="roles">
+            <h3>Almost there! 🎉</h3>
+            <h5>This game is best played in groups of 5</h5>
+            <h1>Please enter the nicknames of your teammates or just skip to the game!</h1>
+            <form id="nicknames_form">
+                <div id="tags">
+                    <textarea placeholder="Nicknames (one word)" id="nicknames" name="nicknames" rows="1" class="light_input"></textarea><br><br>
+                </div>
+            </form>
+            <div>
+                <button class="control_button" onclick="startGame()">GET ROLES 🎉</button>
             </div>
-        </form>
-        <button class="control_button" onclick="startGame()">START 🎉</button>
-    </div>   
+        </div>   
+    </div>
 </body>
 </html>

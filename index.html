@@ -1,29 +1,84 @@
 <!DOCTYPE html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css?v=1.1">
+    <link rel="stylesheet" href="style.css?v=1.2">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
 
-
+    <title>Athena</title>
+    <link rel = "icon" href = "lambda.png" type = "image/x-icon">
 
 </head>
 <html>
 <body>
-    <div class="main_block">
-        <div class='container'>
-            <a href="deck.html"><span class='pulse-button'>PLAY</span></a>
-        </div>
-        <br>
-        <div class="i_wrapper">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/dgqg0OnzHtE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <div class="left_al">
-            <h2>What is this game❓</h2><p></p><strong>Facilitators</strong>👩&zwj;🏫👨&zwj;🏫: An educational card game that you can use in any class scenario😲, from a class warm-up to a reviewing session!&nbsp;<br /><strong>Students</strong>👩&zwj;👧&zwj;👦👨&zwj;👧: A game you can use with your friends🤗 to review content outside of class!&nbsp;</p>
-            <br /><h2>How to play the game?</h2><p></p>1️⃣The game is best played in breakout groups of 5.<br />2️⃣ At the beginning, each student is assigned a role. Roles are designed to ensure organized and productive learning.<br />3️⃣ Students will draw cards from the deck and will have two minutes to solve it! Some challenges are solved individually and others require group cooperation!&nbsp;</p>
-            <br /><h2>Why is it special❓&nbsp;</h2><p><strong>Inclusive</strong>🙌🏽🙌🏿🙌🏻: The game is offered in the most spoken languages in San Francisco: English, Spanish, and Mandarin, allowing students to read cards in both their native and spoken language at school😊. The game incorporates visuals🎨, easing students&rsquo; understanding of the cards.&nbsp;<br /><strong>Participation</strong>: In an online class of 25 students👩&zwj;👧&zwj;👦 to 1 teacher👩&zwj;🏫, students have limited opportunities to participate and test their knowledge😥. Reduced groups and role assignation provide an organized structure for students to engage with what they have learned🤗. Cooperation: Creative and problem solving challenges require students cooperation! Further, individual challenges also require students input!<br /><strong>Flexible</strong>: The game is played by cards, each lasting 2 minutes at most😲! Facilitators can have students play a few cards as a warm up or play a whole deck to review the unit content! It is up to you!<br /><strong>Feedback</strong>: Most of the specialized card deck provide either an answer or an example of what the answer should look like, guiding students learning 🤗. If doubts persist, the note-taker can always write✍🏾 the question and wait to return to the main class to ask✋🏽 the facilitator&nbsp;</p>
+    <!-- Messenger Chat Plugin Code -->
+    <div id="fb-root"></div>
+    <script>
+    window.fbAsyncInit = function() {
+        FB.init({
+        xfbml            : true,
+        version          : 'v10.0'
+        });
+    };
 
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <!-- Your Chat Plugin code -->
+    <div class="fb-customerchat"
+    attribution="page_inbox"
+    page_id="109344194626762">
+    </div>
+    <div class="row">
+            <div class="col-md-6  mx-auto">
+            <div class="main_block">
+                <div class='container'>
+                    <a href="deck.html"><span class='pulse-button'>PLAY</span></a>
+                </div>
+                <br>
+                <div class="tabs">
+
+                    <input type="radio" name="tabs" id="tabone" checked="checked">
+                    <label for="tabone">DEMO</label>
+                    <div class="tab">
+                      <div class="i_wrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/NSsL2Sjh33A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                
+                    <input type="radio" name="tabs" id="tabtwo">
+                    <label for="tabtwo">ABOUT</label>
+                    <div class="tab">
+                        <h2>What is this game❓</h2><p></p><strong>Facilitators</strong>👩&zwj;🏫👨&zwj;🏫: An educational card game that you can use in any class scenario😲, from a class warm-up to a reviewing session!&nbsp;<br /><strong>Students</strong>👩&zwj;👧&zwj;👦👨&zwj;👧: A game you can use with your friends🤗 to review content outside of class!&nbsp;</p>
+                        <br /><h2>Why is it special❓&nbsp;</h2><p><strong>Inclusive</strong>🙌🏽🙌🏿🙌🏻: The game is offered in the most spoken languages in San Francisco: English, Spanish, and Mandarin, allowing students to read cards in both their native and spoken language at school😊. The game incorporates visuals🎨, easing students&rsquo; understanding of the cards.&nbsp;<br /><br><strong>Participation</strong>: In an online class of 25 students👩&zwj;👧&zwj;👦 to 1 teacher👩&zwj;🏫, students have limited opportunities to participate and test their knowledge😥. Reduced groups and role assignation provide an organized structure for students to engage with what they have learned🤗. Cooperation: Creative and problem solving challenges require students cooperation! Further, individual challenges also require students input!<br /><br><strong>Flexible</strong>: The game is played by cards, each lasting 2 minutes at most😲! Facilitators can have students play a few cards as a warm up or play a whole deck to review the unit content! It is up to you!<br /><br><strong>Feedback</strong>: Most of the specialized card deck provide either an answer or an example of what the answer should look like, guiding students learning 🤗. If doubts persist, the note-taker can always write✍🏾 the question and wait to return to the main class to ask✋🏽 the facilitator&nbsp;</p>
+                    </div>
+                    <input type="radio" name="tabs" id="tabthree">
+                    <label for="tabthree">HOW TO PLAY</label>
+                    <div class="tab">
+                        <br /><h2>How to play the game❓</h2><p></p>1️⃣ The game is best played in breakout groups of 5.<br />2️⃣ At the beginning, each student is assigned a role. Roles are designed to ensure organized and productive learning.<br />3️⃣ Students will draw cards from the deck and will have two minutes to solve it! Some challenges are solved individually and others require group cooperation!&nbsp;</p>
+                    </div>
+                    <input type="radio" name="tabs" id="tabfour">
+                    <label for="tabfour">SCIENCE BEHIND IT</label>
+                    <div class="tab">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/WRHDsz8tfDs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                    </div>
+
+                  </div>
+ 
+                <div class="left_al">
+                    
+                </div>
+                <div class="index_logo">
+                    <a href="index.html"><img src="athena.png"></a>
+                    <br><span>© 2021</span>
+                </div>
+            </div>
         </div>
     </div>
 </body>

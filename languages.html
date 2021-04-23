@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css?v=1.1">
+    <link rel="stylesheet" href="style.css?v=1.2">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
-
+    <title>Athena</title>
+    <link rel = "icon" href = "lambda.png" type = "image/x-icon">
     <script>
         function checkboxlimit(checkgroup, limit){
             var checkgroup=checkgroup
@@ -30,33 +31,68 @@
 <body>
     <script>
         function submit_form() {
-            const queryString = window.location.search;
-            console.log(queryString);
-            const urlParams = new URLSearchParams(queryString);
-            const deck = urlParams.get('deck')
-            const subject = urlParams.get('subject')
-            var langs = []
-            var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+            var checkgroup=document.forms.langs_form.langs
+            for (var i=0; i<checkgroup.length; i++){
+                var checkedcount=0
+                for (var i=0; i<checkgroup.length; i++)
+                    checkedcount+=(checkgroup[i].checked)? 1 : 0
+                if (checkedcount<2){
+                    alert("Please select two languages!")
+                
+                } else {
+                    const queryString = window.location.search;
+                    console.log(queryString);
+                    const urlParams = new URLSearchParams(queryString);
+                    const deck = urlParams.get('deck')
+                    const subject = urlParams.get('subject')
+                    var langs = []
+                    var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
 
-            for (var i = 0; i < checkboxes.length; i++) {
-                langs.push(checkboxes[i].value)
-            }
-            console.log("langs "+ langs)
-            window.open("team.html?deck="+deck+"&subject="+ subject+"&lang_one="+langs[0]+"&lang_two="+langs[1], "_self");
+                    for (var i = 0; i < checkboxes.length; i++) {
+                        langs.push(checkboxes[i].value)
+                    }
+                    console.log("langs "+ langs)
+                    window.open("team.html?deck="+deck+"&subject="+ subject+"&lang_one="+langs[0]+"&lang_two="+langs[1], "_self");
+                        }
+            
+            
         }
+    }
     </script>
-    <div class="main_block">
-        <h3>The cards will have two languages 🤯</h3>
-        <h1>Please choose the 2 most popular languages in your group!</h1>
-        <form id="langs_form" name="langs_form">
-            <input type="checkbox" name="langs" value="en"/><span> English 🇺🇸</span><br />
-            <input type="checkbox" name="langs" value="es"/><span> Spanish 🇪🇸</span><br />
-            <input type="checkbox" name="langs" value="ma"/><span> Mandarin 🇨🇳</span><br />
-        </form>
-        <button class="control_button" onclick="submit_form()"> 🥳🤩😵 </button>
-        <script>
-            checkboxlimit(document.forms.langs_form.langs, 2)
-        </script>
+    <div class="logo">
+        <a href="index.html"><img src="athena.png"></a>
+    </div>
+    <div class="col-md-6 mx-auto">
+        <div class="main_block">
+            <h3>The cards will have two languages 🤯</h3>
+            <h1>Please choose the 2 most popular languages in your group!</h1>
+            <div class="col-md-5 mx-auto col-sm-5 col-xs-5">
+                <form id="langs_form" name="langs_form">
+                    <label>
+                        <input type="checkbox" class="option-input checkbox" name="langs" value="en" />
+                        English 🇺🇸
+                      </label>
+                      <br> <br>
+                      <label>
+                        <input type="checkbox" class="option-input checkbox"  name="langs" value="es"/>
+                        Spanish 🇪🇸
+                      </label>
+                      <br>
+                      <label>
+                        <input type="checkbox" class="option-input checkbox" name="langs" value="ma"/>
+                        Mandarin 🇨🇳
+                      </label>
+                </form>
+
+            </div>
+            <br> <br>
+            <div class="cust_btn">
+                <button class="control_button" onclick="submit_form()"> PICK TEAMMATES 🤩 </button>
+            </div>
+            <script>
+                checkboxlimit(document.forms.langs_form.langs, 2)
+            </script>
+        </div>
     </div>
 </body>
 </html>

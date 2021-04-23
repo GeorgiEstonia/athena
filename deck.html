@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css?v=1.1">
+    <link rel="stylesheet" href="style.css?v=1.2">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
 
-
+    <title>Athena</title>
+    <link rel = "icon" href = "lambda.png" type = "image/x-icon">
 
 </head>
 <html>
@@ -16,13 +17,19 @@
             window.open(card+".html?deck="+deck, "_self");
         }
     </script>
-    <div class="main_block">
-        <h3>We have a couple of decks prepared for you 😊</h3>
-        <br>
-        <h1>Would you like to play biology or a custom deck?</h1>
-        <div class="buttons">
-            <button class="control_button" onclick="openWindow('cells_and_organisms','languages')">🦠BIOLOGY</button>
-            <button class="control_button" onclick="openWindow('general','custom_deck')">CUSTOM DECK</button>
+    <div class="logo">
+        <a href="index.html"><img src="athena.png"></a>
+    </div>
+    <div class="col-md-6 mx-auto">
+        <div class="main_block ">
+            <h3>We have a couple of decks prepared for you 😊</h3>
+            <br>
+            <h1>Would you like to play biology or a custom deck?</h1>
+            <div class="buttons">
+                <button class="control_button" onclick="openWindow('cells_and_organisms','languages')">🦠CELLS & ORGANISMS (GRADE 7)</button>
+                <br><br>
+                <button class="control_button" onclick="openWindow('general','custom_deck')">🖌️CUSTOM DECK</button>
+            </div>
         </div>
     </div>
 </body>

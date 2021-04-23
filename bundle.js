@@ -1,6 +1,10 @@
 var Timer = require("./node_modules/easytimer.js").Timer;
 var timerInstance = new Timer();
-window.showAnswer = function(lang, answer) {
+
+//Store num of cards played
+var cardCount = 0;
+
+window.showAnswer = function(lang, answer, dataMap) {
   console.log("TRIGGERED");
   if (lang === 1) {
     window.document.getElementById("lang_one_action").innerHTML = "";
@@ -11,6 +15,19 @@ window.showAnswer = function(lang, answer) {
     window.document.getElementById("lang_two_paragraph").innerHTML = answer;
     window.document.getElementById("lang_two_answ_btn").innerHTML = "";
   }
+}
+
+window.showTask = function(lang, dataMap) {
+  if (lang === 1) {
+    window.document.getElementById("lang_one_action").innerHTML = "";
+    window.document.getElementById("lang_one_paragraph").innerHTML = dataMap.l1P;
+    window.document.getElementById("lang_one_answ_btn").innerHTML = "<button class='control_button' onclick='showTask(1)'>BACK TO TASK</button>";
+  } else {
+    window.document.getElementById("lang_two_action").innerHTML = "";
+    window.document.getElementById("lang_two_paragraph").innerHTML = answer;
+    window.document.getElementById("lang_two_answ_btn").innerHTML = "<button class='control_button' onclick='showTask(2)'>BACK TO TASK</button>";;
+  }
+
 }
 window.createCard =function() {
 
@@ -30,7 +47,7 @@ window.createCard =function() {
   const lang_two = urlParams.get('lang_two')
   const deck = urlParams.get('deck')
   const team_string = urlParams.get('team')  
-  const nicknames = team_string.split("_")
+  var nicknames = team_string.split("_")
   show_roles(nicknames)
   console.log(deck)
 
@@ -51,11 +68,22 @@ window.createCard =function() {
       console.log("results " + results)
       cardNum = Math.floor(Math.random() * (results.length));
       console.log(results[cardNum]["en_title"])
+      cardCount += 1;
+      updateCards();
       try {
         // lang one
+        let l1Paragraph = results[cardNum][lang_one+"_paragraph"].replace("$blahblahblah$", subject);
+        let l1Action = results[cardNum][lang_one+"_action"].replace("$blahblahblah$", subject)
+        let l2Paragraph = results[cardNum][lang_two+"_paragraph"].replace("$blahblahblah$", subject);
+        let l2Action = results[cardNum][lang_two+"_action"].replace("$blahblahblah$", subject);
+
+        var dataMap = {
+          l1P: l1Paragraph,
+          l1A: l1Action
+        }
         window.document.getElementById("lang_one_title").innerHTML = results[cardNum][lang_one+"_title"].replace("$blahblahblah$", subject);
-        window.document.getElementById("lang_one_action").innerHTML = results[cardNum][lang_one+"_action"].replace("$blahblahblah$", subject);
-        window.document.getElementById("lang_one_paragraph").innerHTML = results[cardNum][lang_one+"_paragraph"].replace("$blahblahblah$", subject);
+        window.document.getElementById("lang_one_action").innerHTML = l1Action;
+        window.document.getElementById("lang_one_paragraph").innerHTML = l1Paragraph;
         
         console.log(results[cardNum]["image_link"])
         window.document.getElementsByClassName("illustration")[0].src = results[cardNum]["image_link"];
@@ -64,8 +92,8 @@ window.createCard =function() {
         
         // lang two
         window.document.getElementById("lang_two_title").innerHTML = results[cardNum][lang_two+"_title"].replace("$blahblahblah$", subject);
-        window.document.getElementById("lang_two_action").innerHTML = results[cardNum][lang_two+"_action"].replace("$blahblahblah$", subject);
-        window.document.getElementById("lang_two_paragraph").innerHTML = results[cardNum][lang_two+"_paragraph"].replace("$blahblahblah$", subject);
+        window.document.getElementById("lang_two_action").innerHTML = l2Action;
+        window.document.getElementById("lang_two_paragraph").innerHTML = l2Paragraph;
 
 
         //window.document.getElementById("lang_two_answ_btn").innerHTML = "<button class='control_button'>Reveal answer</button>"
@@ -82,12 +110,12 @@ window.createCard =function() {
         langTwoAnsw = results[cardNum][lang_two+"_solutions"];
         console.log("ANSW " + langOneAnsw + langTwoAnsw)
         if (langOneAnsw !== undefined) {
-          window.document.getElementById("lang_one_answ_btn").innerHTML = "<button class='control_button' onclick='showAnswer(1,\""+String(langOneAnsw)+"\")'>Reveal answer</button>"
+          window.document.getElementById("lang_one_answ_btn").innerHTML = "<button class='control_button' onclick='showAnswer(1,\""+String(langOneAnsw)+ "," + dataMap +"\")'>SHOW ANSWER</button>"
         } else {
           window.document.getElementById("lang_one_answ_btn").innerHTML = "";
         }
         if (langTwoAnsw !== undefined) {
-          window.document.getElementById("lang_two_answ_btn").innerHTML = "<button class='control_button' onclick='showAnswer(2,\""+String(langTwoAnsw)+"\")'>Reveal answer</button>"
+          window.document.getElementById("lang_two_answ_btn").innerHTML = "<button class='control_button' onclick='showAnswer(2,\""+String(langTwoAnsw)+"\")'>SHOW ANSWER</button>"
         } else {
           window.document.getElementById("lang_two_answ_btn").innerHTML = "";
         }
@@ -105,8 +133,12 @@ window.timerFunction = function() {
     timerInstance.start()
   }  
   timerInstance.addEventListener('secondsUpdated', function (e) {
-    window.document.getElementById("timer").innerHTML = timerInstance.getTimeValues().toString().substring(3);
+    window.document.getElementById("timer").innerHTML = "🕒 " + timerInstance.getTimeValues().toString().substring(3);
 });
+
+}
+window.updateCards = function() {
+  window.document.getElementById("cards_played").innerHTML = "🃏 " + cardCount;
 
 }
 
@@ -151,9 +183,9 @@ window.fireworks = function() {
 window.show_roles = function(nicknames) {
 
   console.log(nicknames)
-  nicknames = shuffle(nicknames); // shuffle
+  // nicknames = shuffle(nicknames); // shuffle
 
-  let roles = document.getElementsByClassName("roles_card")[0];
+  let roles = document.getElementsByClassName("roles_descs")[0];
   roles.innerHTML = "<h4>Play according to these roles:</h4><br>";
   let role_descriptions = [
       "Speaker🎙: reads the cards to the group",
@@ -170,6 +202,7 @@ window.show_roles = function(nicknames) {
     for (var i = 0; i < role_descriptions.length; i++) {
       roles.innerHTML += "<br>"+"<p>"+role_descriptions[i]+"</p><br>";
     }
+    document.getElementsByClassName("shuffle_btn")[0].innerHTML=""
   }
 }
 
@@ -183,4 +216,14 @@ window.shuffle = function (a) {
       a[j] = x;
   }
   return a;
+}
+
+window.shuffleRoles = function() {
+  const queryString = window.location.search;
+  console.log(queryString);
+  const urlParams = new URLSearchParams(queryString);
+  const team_string = urlParams.get('team')  
+  var nicknames = team_string.split("_")
+  nicknames=shuffle(nicknames);
+  show_roles(nicknames)
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css?v=1.1">
+    <link rel="stylesheet" href="style.css?v=1.2">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dekko">
     <meta charset="UTF-8">
@@ -9,45 +9,62 @@
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
     <script type="text/javascript" src="dist/bundle.js"></script>
-
+    <title>Athena</title>
+    <link rel = "icon" href = "lambda.png" type = "image/x-icon">
 </head>
 <html>
 <body onload="createCard()">
-    <div class="top">
-        <div class="controls">
-            <div id="timer">00:00</div>
-            <div class="buttons">
-                <button type="button" onclick="createCard()" class = "control_button">New card</button>
-                <button type="button" onclick="fireworks()" class = "control_button">🎉</button>
+    
+        <div class="top">
+            <div class="card_logo">
+                <a href="index.html"><img src="athena.png"></a>
             </div>
-        </div>
-    </div>
-    <div id = "float_container">
-        <div class = "float_child">
-            <div id="lang_one_block">
-                <h3 id = "lang_one_title"></h3>
-                <h2 id = "lang_one_action"></h2>
-                <p id = "lang_one_paragraph"></p>
-                <img class="illustration" src = ""></img>
-                <br>
-                <div id=lang_one_answ_btn></div>
-            </div>
-        </div>
-        <div class = "float_child">
-            <div id="lang_two_block">
-                <h3 id = "lang_two_title"></h3>
-                <h2 id = "lang_two_action"></h2>
-                <p id = "lang_two_paragraph"></p>  
-                <img class="illustration" src = ""></img>
-                <br>
-                <div id=lang_two_answ_btn></div>
-            </div>                  
-        </div>
-        <div class = "float_child">
-            <div class="roles_card">
+            <div class="controls">
+                <div id="timer" class="bubble">🕒 00:00</div>
+                <div id="cards_played" class="bubble">🃏 1</div>
 
-            </div>                  
-        </div>      
+                <div class="buttons">
+                    <button type="button" onclick="createCard()" class = "control_button">NEW CARD</button>
+                    <button type="button" onclick="fireworks()" class = "control_button">🎉</button>
+                </div>
+            </div>
+        </div>
+    <div class="card_wrapper">
+        <div class="row" >
+            <div class="col-md-4" >
+                        <div id="lang_one_block">
+                            <h3 id = "lang_one_title"></h3>
+                            <h2 id = "lang_one_action"></h2>
+                            <p id = "lang_one_paragraph"></p>
+                            <img class="illustration" src = ""></img>
+                            <br>
+                            <div id=lang_one_answ_btn></div>
+                        </div>
+            </div>
+            <div class="col-md-4">
+                        <div id="lang_two_block">
+                            <h3 id = "lang_two_title"></h3>
+                            <h2 id = "lang_two_action"></h2>
+                            <p id = "lang_two_paragraph"></p>  
+                            <img class="illustration" src = ""></img>
+                            <br>
+                            <div id=lang_two_answ_btn></div>
+                        </div>                  
+            </div>
+            <div class="col-md-4">
+                        <div class="roles_card">
+                            <div class="roles_descs">
+
+                            </div>
+                            <div class="shuffle_btn">
+                                <button class="control_button" onclick="shuffleRoles()" >SHUFFLE 🔀</button>
+                            </div>
+
+                        </div>                  
+            </div>      
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
