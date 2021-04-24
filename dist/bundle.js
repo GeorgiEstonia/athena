@@ -111,7 +111,7 @@ window.createCard =function() {
         langTwoAnsw = results[cardNum][lang_two+"_solutions"];
         console.log("ANSW " + langOneAnsw + langTwoAnsw)
         if (langOneAnsw !== undefined) {
-          window.document.getElementById("lang_one_answ_btn").innerHTML = "<button class='control_button' onclick='showAnswer(1,\""+String(langOneAnsw)+ "," + dataMap +"\")'>SHOW ANSWER</button>"
+          window.document.getElementById("lang_one_answ_btn").innerHTML = "<button class='control_button' onclick='showAnswer(1,\""+String(langOneAnsw)+"\")'>SHOW ANSWER</button>"
         } else {
           window.document.getElementById("lang_one_answ_btn").innerHTML = "";
         }

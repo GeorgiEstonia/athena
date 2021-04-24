@@ -50,19 +50,19 @@
 
             let roles = document.getElementsByClassName("role_descriptions")[0];
             let role_descriptions = [
-                "Speaker🎙: reads the cards to the group",
-                "Solver💡: performs the task unless it's a group exercise",
-                "Note-taker📝: writes down the takeaways of each round ",
-                "Facilitator🤝: tracks turn order and encourages team cooperation",
-                "Time-keeper⏱: limits the turns to 2 minutes",
+                "Speaker🎙️:<ul><li>Your <b>turn</b> comes when your team draws a new card🃏 from the deck.</li><li>Your <b>role</b> is to read the card🗣️ to your teammates.</li><li>Make it exciting!✨</li></ul>",
+                "Facilitator🤝:<ul><li>Your <b>turn</b> comes after the speaker🎙️.</li><li>Your <b>role</b> is to encourage team cooperation ✋🏿✋🏽✋🏻, ensuring everyone participates 👐.</li><li>You might ask the solver💡 to respond to the prompt (e.g., <i>Come up with two truths and one lie about ___ topic).</i></li></ul>",
+                "Solver💡:<ul><li>Your <b>turn</b> comes after the facilitator🤝. </li><li>Your <b>role</b> is to respond to the prompt of the card🃏. </li><li>For instance, you might have to come up with two truths, and one lie on the spot!😉 </li></ul>",
+                "Note-taker📝:<ul><li>Your <b>turn</b> comes at the end of the round when the card🃏 has been solved💡. </li><li>Your <b>role</b> is to write down the takeaways🤯 of each card🃏.</li><li>What did your team learn? What surprised you? Do you have any questions? Write them down in the chat💬</li></ul>",
+                "Time-keeper⏱️: <ul><li>Your <b>turn</b> takes place during the entire round. </li><li>Your <b>role</b> is to encourage the team to finish the card🃏 in 2️⃣ minutes. Look at the timer⏱️ in the top right corner to see how much time is left! </li><li>If your team gets stuck🤔, ask the note-taker📝 to write the doubts in chat💬. You can ask your team’s questions to your facilitator when you return to the main classroom.</li></ul>",
             ]
             if (nicknames.length>1) {
             for (var i = 0; i < Math.min(nicknames.length, role_descriptions.length); i++) {
-                roles.innerHTML += "<h4>"+nicknames[i]+"</h4> <p>"+role_descriptions[i]+"</p><br>";
+                roles.innerHTML += "<h4>"+nicknames[i]+"</h4> <p>"+role_descriptions[i]+"</p>";
             }
             } else {
             for (var i = 0; i < role_descriptions.length; i++) {
-                roles.innerHTML += "<br>"+"<p>"+role_descriptions[i]+"</p><br>";
+                roles.innerHTML += "<br>"+"<p>"+role_descriptions[i]+"</p>";
             }
             }
         }
@@ -116,7 +116,6 @@
             <h3>Explore your roles! 🧐</h3>
             <br>
             <h1>Take 30 seconds to carefully read your role!</h1>
-            <br>
             <div class="role_descriptions"></div>
             <div class="roles_btn">
                 <button class="control_button" onclick="startGame()" id="pulsing_btn">START 🎉</button>
