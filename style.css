@@ -18,6 +18,10 @@
   backface-visibility: hidden;
 }
 
+.button_margin {
+  margin:1ex !important;
+}
+
 .pulse-button {
   margin: auto;
   position: relative;

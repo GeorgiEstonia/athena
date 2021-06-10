@@ -4,6 +4,33 @@
     <link rel="stylesheet" href="style.css?v=1.2">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        var headers =["name","age"];//change this to fit the headers in the spreadsheet
+        
+        // ID of the Google Spreadsheet
+        var spreadsheetID = "1O2RAmqAw38ALQfCkuBAvbCgKE8bah6Nvt_q-PLtra6w";
+        
+        // Make sure it is published 
+        var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/od6/public/values?alt=json";
+        $(document).ready(function() {
+            $.getJSON(url, function(json)
+            {
+                var data = json.feed.entry;
+                var subjects = [];	
+                for(var r=0; r<data.length; r++)
+                {
+                    var subj = data[r]["gsx$"+"subject"]["$t"];
+                    if (!subjects.includes(subj) && subj != "general") {
+                        $('#populate_buttons').append('<button class="control_button button_margin" onclick="openWindow('+'\''+subj+'\''+','+'\''+"languages"+'\''+')">'+subj+'</button>');
+                    }
+                    subjects.push(subj);
+                }
+            });
+        });
+
+      
+    </script>  
     <meta charset="UTF-8">
 
     <title>Athena</title>
@@ -13,6 +40,9 @@
 <html>
 <body>
     <script>
+        function createDeckButtons() {
+
+        }
         function openWindow(deck, card) {
             window.open(card+".html?deck="+deck, "_self");
         }
@@ -25,10 +55,8 @@
             <h3>We have a couple of decks prepared for you 😊</h3>
             <br>
             <h1>Would you like to play biology or a custom deck?</h1>
-            <div class="buttons">
-                <button class="control_button" onclick="openWindow('cells_and_organisms','languages')">🦠CELLS & ORGANISMS (GRADE 7)</button>
-                <br><br>
-                <button class="control_button" onclick="openWindow('general','custom_deck')">🖌️CUSTOM DECK</button>
+            <div class="buttons" onload="createDeckButtons()" id="populate_buttons">
+                <button class="control_button button_margin" onclick="openWindow('general','custom_deck')">🖌️CUSTOM DECK</button>
             </div>
         </div>
     </div>

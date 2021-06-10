@@ -180,13 +180,13 @@ window.fireworks = function() {
   });
 }
 
+
+// displaying roles
 window.show_roles = function(nicknames) {
-
-  console.log(nicknames)
-  // nicknames = shuffle(nicknames); // shuffle
-
-  let roles = document.getElementsByClassName("roles_descs")[0];
-  roles.innerHTML = "<h4>Play according to these roles:</h4><br>";
+  let roles = document.getElementsByClassName("roles_descs")[0]; // retrieving HMTL div that will contain roles
+  roles.innerHTML = "<h4>Play according to these roles:</h4><br>"; // Setting a title to the block
+  
+  // Role descriptions ranked by importance in a descending order
   let role_descriptions = [
       "Speaker🎙: reads the cards to the group",
       "Solver💡: performs the task unless it's a group exercise",
@@ -194,15 +194,19 @@ window.show_roles = function(nicknames) {
       "Facilitator🤝: tracks turn order and encourages team cooperation",
       "Time-keeper⏱: limits the turns to 2 minutes",
     ]
+
+  // if there are more than 1 nicnames, assign specific roles
   if (nicknames.length>1) {
-    for (var i = 0; i < Math.min(nicknames.length, role_descriptions.length); i++) {
-      roles.innerHTML += "<h4>"+nicknames[i]+"</h4> <p>"+role_descriptions[i]+"</p><br>";
+    for (var i = 0; i < Math.min(nicknames.length, role_descriptions.length); i++) { // looping through each role/nickname (take shortest array)
+      roles.innerHTML += "<h4>"+nicknames[i]+"</h4> <p>"+role_descriptions[i]+"</p><br>"; // adding nickname+role to HTML div
     }
   } else {
-    for (var i = 0; i < role_descriptions.length; i++) {
-      roles.innerHTML += "<br>"+"<p>"+role_descriptions[i]+"</p><br>";
+
+    // if there is only 1 or 0 nicknames, display roles without assignment
+    for (var i = 0; i < role_descriptions.length; i++) { // looping through each role
+      roles.innerHTML += "<br>"+"<p>"+role_descriptions[i]+"</p><br>"; // adding roles to HTML div
     }
-    document.getElementsByClassName("shuffle_btn")[0].innerHTML=""
+    document.getElementsByClassName("shuffle_btn")[0].innerHTML="" // adding SHUFFLE button to HTML
   }
 }
 
